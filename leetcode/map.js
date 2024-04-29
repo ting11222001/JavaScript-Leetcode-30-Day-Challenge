@@ -18,18 +18,19 @@
  * @return {number[]}
  */
 var map = function (arr, fn) {
-  // Solution 2: loop over with index
+  // Solution 2: loop over the array with index
   const result = [];
 
   for (const i in arr) {
-    result.push(fn(arr[i], i));
-    // result is an array object, so I can use the push method, but cannot reassign it with new array value.
-    // "i" was string, so I need to cast it into number e.g. result.push(fn(arr[i], Number(i)));
+    result.push(fn(arr[i], Number(i)));
+    // result is an array object, so I can use the push method, but result cannot be reassigned with new array value. "i" was string, so I need to cast it into number.
   }
 
   return result;
 
-  // Solution 1: Use map method from the array object. Create a new array by performing a function on each array element.
+  // Solution 1: Functional Programming
+  // i.e. no state management explicitly.
+  // Use map method from the array object. Create a new array by performing a function on each array element.
   // return arr.map(fn);
 };
 
@@ -39,13 +40,19 @@ function plusOne(n) {
   return n + 1;
 }
 
-const plusOneResult = map(arr1, plusOne)
+function plusByIndex(n, i) {
+  return n + i;
+}
+
+function constant() {
+  return 42;
+}
+
+const plusOneResult = map(arr1, plusOne);
 console.log(plusOneResult); // [ 2, 3, 4 ]
 
-const cars = ["BMW", "Volvo", "Mini"];
+const plusByIndexResult = map(arr1, plusByIndex);
+console.log(plusByIndexResult); // [ 1, 3, 5 ]
 
-let text = "";
-for (let x of cars) {
-  text += x;
-}
-console.log(text);
+const constantResult = map(arr1, constant);
+console.log(constantResult); // [ 42, 42, 42 ]
