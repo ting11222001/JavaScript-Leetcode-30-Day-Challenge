@@ -30,7 +30,7 @@ var createCounter = function (init) {
   }
 };
 
-const counter = createCounter(5)
+const counter = createCounter(5);
 console.log(counter.increment()); // 6
 console.log(counter.reset()); // 5
 console.log(counter.decrement()); // 4
@@ -82,7 +82,7 @@ var createCounter2 = function (init) {
   }
 };
 
-const counter2 = createCounter2(5)
+const counter2 = createCounter2(5);
 console.log(counter2.increment()); // 6
 console.log(counter2.reset()); // 5
 console.log(counter2.decrement()); // 4
