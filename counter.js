@@ -1,4 +1,9 @@
 /**
+ * https://www.youtube.com/watch?v=yEGQQAG5V68&ab_channel=NeetCodeIO
+ * https://leetcode.com/problems/counter/?envType=study-plan-v2&envId=30-days-of-javascript
+ */
+
+/**
  * @param {number} n
  * @return {Function} counter
  */
