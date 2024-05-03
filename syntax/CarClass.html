@@ -1,0 +1,46 @@
+<!-- 
+  this one explained about "super()". Basically, the child constructor must call super().
+  https://javascript.info/class-inheritance
+-->
+
+
+<!DOCTYPE html>
+<html>
+
+<body>
+<p id="demo"></p>
+
+<script>
+class Car {
+  constructor(brand) {
+    this.carName = brand
+  }
+
+  present() {
+    return 'I have a ' + this.carName
+  }
+}
+
+class Model extends Car {
+  constructor(brand, model) {
+    super(brand) // invoke the parent class' constructor
+    this.model = model
+  }
+
+  show() {
+    return this.present() + ', it is a ' + this.model
+  }
+}
+
+const mycar = new Car("Ford");
+document.write(mycar.carName); // Ford
+
+document.write(mycar.present()); // I have a Ford
+
+const myModel = new Model("Ford", "Mustang")
+document.getElementById("demo").innerHTML = myModel.show() // I have a Ford, it is a Mustang
+
+</script>
+
+</body>
+</html>
