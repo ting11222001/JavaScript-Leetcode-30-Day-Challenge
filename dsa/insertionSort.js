@@ -74,12 +74,12 @@ insertionSort3([5, 2, 4, 6, 1, 3]) // [1, 2, 3, 4, 5, 6]
 insertionSort3([2, 4, 1, 3]) // [1, 2, 3, 4]
 
 
-// Solution 4:
+// Solution 4: inspired by DerrickSherrill
 function insertionSort4(arr) {
   for (let i = 1; i < arr.length; i++) {
-    // arr[i] is the value to sort
+    let valueToSort = arr[i]
     // arr[i - 1] is the value on the left, and keep going left
-    while (arr[i - 1] > arr[i] && i > 0) {
+    while (arr[i - 1] > valueToSort && i > 0) {
       // SWAP shorthand
       [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]
       i--
