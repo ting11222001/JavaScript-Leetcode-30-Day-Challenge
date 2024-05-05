@@ -7,6 +7,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import ImportedCar from './testExportCar'; // can change the imported function name
+import Todos from "./Todos";
 
 /**
  * JSX allows us to write HTML elements in JavaScript and place them in the DOM without any createElement() and/or appendChild() methods. JSX converts HTML tags into react elements.
@@ -338,7 +339,7 @@ function MyTextArea() {
 
   return (
     <form>
-      <textArea value={textArea} onChange={handleTextChange} />
+      <textarea value={textArea} onChange={handleTextChange}></textarea>
     </form>
   )
 }
@@ -367,3 +368,26 @@ function MySelect() {
 }
 const select = ReactDOM.createRoot(document.getElementById('select'));
 select.render(<MySelect />)
+
+// Using memo will cause React to skip rendering a component if its props have not changed.
+const Todo = () => {
+  const [todos, setTodos] = useState(["todo1", "todo2"])
+  const [count, setCount] = useState(0)
+
+  const increment = () => {
+    setCount(count => count + 1);
+  }
+
+  return (
+    <>
+      <Todos todos={todos} />
+      <hr />
+      <div>
+        Count: {count}
+        <button onClick={increment}>+</button>
+      </div>
+    </>
+  )
+}
+const memoPractice = ReactDOM.createRoot(document.getElementById('memoPractice'));
+memoPractice.render(<Todo />)
