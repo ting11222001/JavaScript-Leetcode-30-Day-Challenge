@@ -1,10 +1,9 @@
 /**
  * https://www.w3schools.com/REACT/react_jsx.asp
- * https://www.w3schools.com/REACT/react_jsx.asp
  */
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import ImportedCar from './testExportCar'; // can change the imported function name
 import Todos from "./Todos";
@@ -391,3 +390,119 @@ const Todo = () => {
 }
 const memoPractice = ReactDOM.createRoot(document.getElementById('memoPractice'));
 memoPractice.render(<Todo />)
+
+// Updating Objects and Arrays in State
+// Because we need the current value of state, we pass a function into our setPerson function. 
+// This function receives the previous value. We then return an object, spreading the previousState and overwriting only the name.
+function Person() {
+  const [person, setPerson] = useState({
+    name: "John",
+    age: "23",
+    gender: "female"
+  })
+
+  const updatePerson = () => {
+    setPerson(prevState => {
+      return {
+        ...prevState,
+        name: "Jane",
+      }
+    })
+  }
+
+  return (
+    <>
+      <h1>I am {person.name}</h1>
+      <p>
+        I am {person.age} years old and my gender is {person.gender}.
+      </p>
+      <button
+        type="button"
+        onClick={updatePerson}
+      >
+        Set the name into "Jane"
+      </button>
+    </>
+  )
+}
+const person = ReactDOM.createRoot(document.getElementById('person'));
+person.render(<Person />)
+
+// useEffect: The useEffect Hook allows you to perform side effects in your components.
+// Some examples of side effects are: fetching data, directly updating the DOM, and timers.
+// useEffect runs on every render.That means that when the count changes, a render happens, which then triggers another effect.
+function Timer() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount(count => count + 1)
+      // pass updater function to setCount (https://react.dev/reference/react/useState)
+    }, 1000)
+  }, []) // <- add empty brackets here, so that it will only render once, or it will keep incrementing
+
+  return (
+    <>
+      <h1>I've rendered {count} times!</h1>
+    </>
+  )
+}
+const timer = ReactDOM.createRoot(document.getElementById('timer'));
+timer.render(<Timer />);
+
+// an example of a useEffect Hook that is dependent on a variable. If the count variable updates, the effect will run again:
+function MultiplyCounter() {
+  const [count, setCount] = useState(0)
+  const [calulation, setCalulation] = useState(0)
+
+  useEffect(() => {
+    setCalulation(() => count * 2)
+  }, [count]) // <- add the count variable here
+
+  return (
+    <>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count => count + 1)}>+</button>
+      <p>Calculation: {calulation}</p>
+    </>
+  )
+}
+const multiply = ReactDOM.createRoot(document.getElementById('multiply'));
+multiply.render(<MultiplyCounter />);
+// Note that the setState function should be called in arrow syntax in onClick={}
+// or being called in another function e.g. onClick={handleChange} and in handleChange() it calls
+// the setState functions
+
+
+// Use the useContext Hook
+const UserContext = createContext();
+function Component1() {
+  const [user, setUser] = useState("Jesse Hall")
+
+  return (
+    <UserContext.Provider value={user}>
+      <h1>{`Hello ${user}!`}</h1>
+      <Component2 />
+    </UserContext.Provider>
+  )
+}
+function Component2() {
+  return (
+    <>
+      <h1>Component2  </h1>
+      <Component3 />
+    </>
+  )
+}
+function Component3() {
+  const user = useContext(UserContext)
+
+  return (
+    <>
+      <h1>Component3</h1>
+      <h2>{`Hello ${user} in Component3 again!`}</h2>
+    </>
+  )
+}
+const context = ReactDOM.createRoot(document.getElementById('context'));
+context.render(<Component1 />);
