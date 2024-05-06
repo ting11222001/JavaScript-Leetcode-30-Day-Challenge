@@ -46,3 +46,7 @@ function palindrome2(str) {
 
 console.log(palindrome2("kayak")); // true
 console.log(palindrome2("school")); // false
+
+/**
+ * https://www.youtube.com/watch?v=jJXJ16kPFWg
+ */
