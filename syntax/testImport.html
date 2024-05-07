@@ -1,0 +1,27 @@
+<!-- Named exports must be destructured using curly braces. Default exports do not. -->
+
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<p id="demo"></p>
+
+<script type="module">
+import message from "./message.js";
+import { name, age, gender, height } from "./person.js";
+
+document.getElementById("demo").innerHTML = message(); // On screen: Jesse is 40 years old.
+
+console.log(message()); // In dev tool console: Jesse is 40 years old.
+
+console.log("This person is " + name + " and is " + age + " years old.");
+// In dev tool console: This person is Jesse and is 40 years old.
+
+console.log("Also, this person is " + gender + " and is " + height + " cm tall.");
+// In dev tool console: Also, this person is female and is 160 cm tall.
+
+</script>
+
+</body>
+</html>
