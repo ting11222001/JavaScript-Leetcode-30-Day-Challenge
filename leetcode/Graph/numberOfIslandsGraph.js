@@ -1,6 +1,7 @@
 /**
  * https://www.youtube.com/watch?v=pV2kpPD66nE&ab_channel=NeetCode
- * 
+ * Not entirely correct yet, javascript solution:
+ * https://github.com/neetcode-gh/leetcode/blob/main/javascript/0200-number-of-islands.js
  */
 
 
